@@ -12,9 +12,6 @@ module StudentDB
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           first_name VARCHAR(64) NOT NULL,
           last_name VARCHAR(64) NOT NULL,
-
-          # ADD THE ADDITIONAL ATTRIBUTES HERE!
-
           created_at DATETIME NOT NULL,
           updated_at DATETIME NOT NULL
         );
@@ -41,5 +38,56 @@ end
 class Student
   # WRITE RUBY CODE HERE
   # IT SHOULD CONTAIN METHODS THAT EXECUTE SQL COMMANDS
+  def initialize(first_name, last_name)
+    @first_name = first_name
+    @last_name = last_name
+  end
+
+  def self.add(first_name, last_name, created_at, updated_at)
+    $db.execute(
+      <<-SQL
+      INSERT INTO students
+      (first_name, last_name, created_at, updated_at)
+      VALUES
+      (#{first_name}, #{last_name}, DATETIME('now'), DATETIME('now'));
+      SQL
+      )
+  end
+
+  def self.delete(first_name, last_name, created_at, updated_at)
+    $db.execute(
+      <<-SQL
+      DELETE FROM students
+      (first_name, last_name, created_at, updated_at)
+      VALUES
+      (#{first_name}, #{last_name}, DATETIME('now'), DATETIME('now'))
+      SQL
+      )
+  end
+
+  def show_all_students(first_name, last_name, created_at, updated_at)
+    $db.execute(
+      <<-SQL
+      show_all_students = student.all? {|k,v| = 'v'}
+      SQL
+      )
+  end
+
+  def show_students(first_name)
+    $db.execute(
+      <<-SQL
+      show_students = student.all? {|k,v|, v = 'first_name'}
+      SQL
+      )
+  end
+
+  def show_students(last_name)
+    $db.execute(
+      <<-SQL
+      show_students = studen.all? {|k,v|, v = 'last_name'}
+      SQL
+      )
+   end
+   
   
 end
